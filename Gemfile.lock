@@ -1,12 +1,26 @@
 PATH
   remote: .
   specs:
-    afip-bill (0.1.0)
+    afip_bill (0.1.0)
+      barby (~> 0.6.2)
+      pdfkit (~> 0.8.2)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    barby (0.6.4)
+    byebug (9.0.6)
+    coderay (1.1.1)
     diff-lcs (1.2.5)
+    method_source (0.8.2)
+    pdfkit (0.8.2)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     rake (10.5.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -21,13 +35,15 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    slop (3.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  afip-bill!
+  afip_bill!
   bundler (~> 1.13)
+  pry-byebug (~> 3.4.0)
   rake (~> 10.0)
   rspec (~> 3.0)
 
