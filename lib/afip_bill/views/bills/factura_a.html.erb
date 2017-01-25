@@ -1,0 +1,64 @@
+<%= @template_header %>
+
+<div style="left:484.19px;top:259.63px" class="cls_011"><span class="cls_011">Alicuota</span></div>
+<div style="left:19.00px;top:263.04px" class="cls_010"><span class="cls_010">Código</span></div>
+<div style="left:59.00px;top:263.04px" class="cls_010"><span class="cls_010">Producto / Servicio</span></div>
+<div style="left:239.39px;top:263.04px" class="cls_010"><span class="cls_010">Cantidad</span></div>
+<div style="left:285.77px;top:263.66px" class="cls_011"><span class="cls_011">U. medida</span></div>
+<div style="left:335.05px;top:263.66px" class="cls_011"><span class="cls_011">Precio Unit.</span></div>
+<div style="left:388.47px;top:263.66px" class="cls_011"><span class="cls_011">% Bonif</span></div>
+<div style="left:434.50px;top:263.66px" class="cls_011"><span class="cls_011">Subtotal</span></div>
+<div style="left:524.27px;top:263.66px" class="cls_011"><span class="cls_011">Subtotal c/IVA</span></div>
+<div style="left:492.17px;top:267.68px" class="cls_011"><span class="cls_011">IVA</span></div>
+
+<% top = 283 %>
+<% @line_items.each_with_index do |line_item, index| %>
+  <div style="left:18.00px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= (index + 1).to_s.rjust(3, "0") %></span></div>
+  <div style="left:57.00px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.name %></span></div>
+  <div style="left:265.43px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.quantity %> </span></div>
+  <div style="left:288.30px;top:<%= top %>px" class="cls_012"><span class="cls_012">unidades</span></div>
+  <div style="left:360.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_unitario %></span></div>
+  <div style="left:398.43px;top:<%= top %>px" class="cls_008"><span class="cls_008">0,00</span></div>
+  <div style="left:454.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_total_unitario %></span></div>
+  <div style="left:490.00px;top:<%= top %>px" class="cls_008"><span class="cls_008">21%</span></div>
+  <div style="left:554.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_total_unitario_con_iva %></span></div>
+  <% top += 25 %>
+<% end %>
+
+<div style="left:17.00px;top:511.97px" class="cls_010"><span class="cls_010">Otros Tributos</span></div>
+<div style="left:21.00px;top:524.54px" class="cls_008"><span class="cls_008">Descripción</span></div>
+<div style="left:184.00px;top:524.54px" class="cls_008"><span class="cls_008">Detalle</span></div>
+<div style="left:270.61px;top:525.16px" class="cls_012"><span class="cls_012">Alíc. %</span></div>
+<div style="left:317.88px;top:524.54px" class="cls_008"><span class="cls_008">Importe</span></div>
+<div style="left:18.00px;top:538.63px" class="cls_008"><span class="cls_008">Per./Ret. de Impuesto a las Ganancias</span></div>
+<div style="left:331.43px;top:538.63px" class="cls_008"><span class="cls_008">0,00</span></div>
+<div style="left:18.00px;top:556.63px" class="cls_008"><span class="cls_008">Per./Ret. de IVA</span></div>
+<div style="left:331.43px;top:556.63px" class="cls_008"><span class="cls_008">0,00</span></div>
+<div style="left:397.98px;top:551.41px" class="cls_002"><span class="cls_002">Importe Neto Gravado: $</span></div>
+<div style="left:547.48px;top:551.41px" class="cls_002"><span class="cls_002"><%= afip_bill["imp_neto"] %></span></div>
+<div style="left:18.00px;top:567.63px" class="cls_008"><span class="cls_008">Per./Ret. Ingresos Brutos</span></div>
+<div style="left:331.43px;top:567.63px" class="cls_008"><span class="cls_008">0,00</span></div>
+<div style="left:456.98px;top:564.41px" class="cls_002"><span class="cls_002">IVA 27%: $</span></div>
+<div style="left:557.49px;top:564.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:18.00px;top:578.63px" class="cls_008"><span class="cls_008">Impuestos Internos</span></div>
+<div style="left:331.43px;top:578.63px" class="cls_008"><span class="cls_008">0,00</span></div>
+<div style="left:18.00px;top:589.63px" class="cls_008"><span class="cls_008">Impuestos Municipales</span></div>
+<div style="left:331.43px;top:589.63px" class="cls_008"><span class="cls_008">0,00</span></div>
+<div style="left:456.98px;top:577.41px" class="cls_002"><span class="cls_002">IVA 21%: $</span></div>
+<div style="left:552.48px;top:577.41px" class="cls_002"><span class="cls_002"><%= afip_bill["imp_iva"] %></span></div>
+<div style="left:186.97px;top:602.91px" class="cls_006"><span class="cls_006">Importe Otros Tributos: $</span></div>
+<div style="left:329.49px;top:602.91px" class="cls_006"><span class="cls_006">0,00</span></div>
+<div style="left:449.48px;top:590.41px" class="cls_002"><span class="cls_002">IVA 10.5%: $</span></div>
+<div style="left:557.49px;top:590.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:461.99px;top:603.41px" class="cls_002"><span class="cls_002">IVA 5%: $</span></div>
+<div style="left:557.49px;top:603.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:454.48px;top:616.41px" class="cls_002"><span class="cls_002">IVA 2.5%: $</span></div>
+<div style="left:557.49px;top:616.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:461.99px;top:629.41px" class="cls_002"><span class="cls_002">IVA 0%: $</span></div>
+<div style="left:557.49px;top:629.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:394.49px;top:642.41px" class="cls_002"><span class="cls_002">Importe Otros Tributos: $</span></div>
+<div style="left:557.49px;top:642.41px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:427.99px;top:656.29px" class="cls_005"><span class="cls_005">Importe Total: $</span></div>
+<div style="left:544.42px;top:656.29px" class="cls_005"><span class="cls_005"><%= afip_bill["imp_total"] %></span></div>
+
+<%= @template_footer %>

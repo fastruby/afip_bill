@@ -1,0 +1,16 @@
+<div style="left:277.76px;top:683.29px" class="cls_005"><span class="cls_005">Pág. 1/1</span></div>
+<div style="left:121.00px;top:687.59px" class="cls_013"><span class="cls_013">Comprobante Autorizado</span></div>
+<div style="left:442.56px;top:688.54px" class="cls_005"><span class="cls_005">CAE N°:</span><span class="cls_007"> <%= afip_bill["cae"] %></span></div>
+<div style="left:16.00px;top:705.73px" class="cls_014"><span class="cls_014">Esta Administración Federal no se responsabiliza por los datos ingresados en el detalle de la operación</span></div>
+<div style="left:374.31px;top:702.54px" class="cls_005"><span class="cls_005">Fecha de Vto. de CAE:</span></div>
+<div style="left:486.00px;top:702.54px" class="cls_007"><span class="cls_007"><%= Date.parse(afip_bill["fch_vto_pago"]).strftime("%d/%m/%Y") %></span></div>
+<div style="left:100px;top:775px" class="cls_008"><span class="cls_008"><%= barcode.data %></span></div>
+
+<div style="left:16px;top:725px;">
+  <%= barcode.to_html %>
+</div>
+
+</div>
+
+</body>
+</html>
