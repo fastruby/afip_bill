@@ -14,57 +14,37 @@ gem 'afip_bill'
 
 In order to have the bills fully complete, you will need to setup some configuration about your business. You can put all of it inside a `initializers/afip_bill.rb` if you want.
 ```ruby
-AfipBill.configuration[:business_name] = "CompanyName"
+AfipBill.configuration[:business_name] = "CompanyName SRL"
 AfipBill.configuration[:business_address] = "Address 1234"
-AfipBill.configuration[:business_start_date] = "01/01/2017"
+AfipBill.configuration[:business_start_date] = "01/01/2016"
 AfipBill.configuration[:business_cuit] = "1234567890"
 AfipBill.configuration[:city] = "Ciudad de Buenos Aires"
 AfipBill.configuration[:ingresos_brutos] = "123-456789-0"
 AfipBill.configuration[:iva] = "IVA Responsable Inscripto"
 AfipBill.configuration[:sale_point] = "0001"
-
 ```
 
-## Usage
+Also, one of the main things that you need to have, is a json for each of your bills. It must contains at least all this attributes:
 
-< explain bravo here >
-
-### Bravo bill
-
-This is an example of a json generated with BRAVO
 ```ruby
 json_bill = {
-  "header_result":"A",
-  "authorized_on":"20161012105510",
-  "detail_result":"A",
-  "cae_due_date":"20161022",
-  "cae":"66414616381416",
-  "iva_id":"03",
-  "iva_importe":0.0,
-  "moneda":"PES",
-  "cotizacion":1,
-  "iva_base_imp":300.0,
-  "doc_num":"27041233515",
-  "cant_reg":"1",
-  "cbte_tipo":"01",
-  "pto_vta":"0017",
-  "concepto":"02",
-  "doc_tipo":"80",
-  "cbte_fch":"20161012",
-  "imp_tot_conc":0.0,
-  "imp_op_ex":0.0,
-  "imp_trib":0.0,
-  "imp_neto":300.0,
-  "imp_iva":0.0,
-  "imp_total":300.0,
-  "cbte_hasta":1,
-  "cbte_desde":1,
-  "fch_serv_desde":"20161001",
-  "fch_serv_hasta":"20161031",
-  "fch_vto_pago":"20161012"
-}
-
+  cae: "1234567890123",       # CAE number
+  doc_num: "12345678901",     # CUIT number
+  cbte_tipo: "01",            # Bill type (01 = A, 06 = B)
+  cbte_fch: "20170125",       # Bill date
+  imp_neto: 220.0,            # Net amount
+  imp_iva: 46.2,              # IVA amount
+  imp_total: 266.2,           # Total amount
+  cbte_hasta: 1,              # Voucher number
+  fch_serv_desde: "20170101", # Invoiced from
+  fch_serv_hasta: "20170131", # Invoiced to
+  fch_vto_pago: "20170115"    # CAE expiration date
+}.to_json
 ```
+
+In [OmbuShop](https://www.ombushop.com/), we like to automatically generate this json with [Bravo gem](https://github.com/leanucci/bravo).
+
+## Usage
 
 There are three important classes that you need to use. Those are: `AfipBill::User`, `AfipBill::LineItem` and `AfipBill::Generator`.
 
@@ -78,7 +58,7 @@ user = AfipBill::User.new("Bill company name",
 ```
 
 ### AfipBill::LineItem
-With this class you can define the line items for your bill. It accepts three params: `Name`, `Quantity`, and `Unit amount`. 
+With this class you can define the line items for your bill. It accepts three params: `Name`, `Quantity`, and `Unit amount`.
 ```ruby
 item_1 = AfipBill::LineItem.new("Item 1", 1, 100)
 item_2 = AfipBill::LineItem.new("Item 2", 1, 120)
@@ -100,7 +80,7 @@ end
 
 ## Demo
 
-This is an example of how it looks a bill generated with this gem: < link to a pdf bill here >
+This is an example of how it looks a bill generated with this gem: [bill_example.pdf](https://github.com/ombulabs/afip_bill/blob/master/bill_example.pdf)
 
 ## License
 
