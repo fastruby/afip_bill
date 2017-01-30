@@ -80,7 +80,7 @@ end
 
 ## Demo
 
-This is an example of how it looks a bill generated with this gem: [bill_example.pdf](https://github.com/ombulabs/afip_bill/blob/master/bill_example.pdf)
+This is an example of how it looks a bill generated with this gem: [bill_sample.pdf](https://github.com/ombulabs/afip_bill/blob/master/bill_sample.pdf)
 
 ## License
 
