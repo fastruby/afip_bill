@@ -1,0 +1,32 @@
+<%= @template_header %>
+
+<div style="left:19.00px;top:272.04px" class="cls_010"><span class="cls_010">Código</span></div>
+<div style="left:60.00px;top:272.04px" class="cls_010"><span class="cls_010">Producto / Servicio</span></div>
+<div style="left:211.39px;top:272.04px" class="cls_010"><span class="cls_010">Cantidad</span></div>
+<div style="left:263.61px;top:272.04px" class="cls_010"><span class="cls_010">U. Medida</span></div>
+<div style="left:324.05px;top:272.66px" class="cls_011"><span class="cls_011">Precio Unit.</span></div>
+<div style="left:386.97px;top:272.66px" class="cls_011"><span class="cls_011">% Bonif</span></div>
+<div style="left:434.42px;top:272.66px" class="cls_011"><span class="cls_011">Imp. Bonif.</span></div>
+<div style="left:520.50px;top:272.66px" class="cls_011"><span class="cls_011">Subtotal</span></div>
+
+<% top = 293 %>
+  <% @line_items.each_with_index do |line_item, index| %>
+  <div style="left:18.00px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= (index + 1).to_s.rjust(3, "0") %></span></div>
+  <div style="left:57.00px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.name %></span></div>
+  <div style="left:243.43px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.quantity %></span></div>
+  <div style="left:268.30px;top:<%= top %>px" class="cls_012"><span class="cls_012">unidades</span></div>
+  <div style="left:357.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_unitario %></span></div>
+  <div style="left:392.22px;top:<%= top %>px" class="cls_008"><span class="cls_008">0,00</span></div>
+  <div style="left:471.43px;top:<%= top %>px" class="cls_008"><span class="cls_008">0,00</span></div>
+  <div style="left:554.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_total_unitario %></span></div>
+  <% top += 25 %>
+<% end %>
+
+<div style="left:444.50px;top:616.59px" class="cls_002"><span class="cls_002">Subtotal: $</span></div>
+<div style="left:545.48px;top:616.59px" class="cls_002"><span class="cls_002"><%= afip_bill["imp_total"] %></span></div>
+<div style="left:382.49px;top:634.59px" class="cls_002"><span class="cls_002">Importe Otros Tributos: $</span></div>
+<div style="left:555.49px;top:634.59px" class="cls_002"><span class="cls_002">0,00</span></div>
+<div style="left:415.99px;top:652.54px" class="cls_005"><span class="cls_005">Importe Total: $</span></div>
+<div style="left:542.42px;top:652.54px" class="cls_005"><span class="cls_005"><%= afip_bill["imp_total"] %></span></div>
+
+<%= @template_footer %>
