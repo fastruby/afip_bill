@@ -14,13 +14,14 @@ module AfipBill
     BRAVO_CBTE_TIPO = { "01" => "Factura A", "06" => "Factura B" , "11" => "Factura C"}.freeze
     IVA = 21.freeze
 
-    def initialize(bill, user, line_items = [])
+    def initialize(bill, user, line_items = [], duplicado_original = 'ORIGINAL')
       @afip_bill = JSON.parse(bill)
       @user = user
       @bill_type = type_a_or_b_bill
       @line_items = line_items
       @template_header = ERB.new(File.read(HEADER_PATH)).result(binding)
       @template_footer = ERB.new(File.read(FOOTER_PATH)).result(binding)
+      @duplicado_original = duplicado_original
     end
 
     def type_a_or_b_bill
