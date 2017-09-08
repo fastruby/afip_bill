@@ -65,11 +65,7 @@ module AfipBill
     end
 
     def template
-      @duplicado_original = 'ORIGINAL'
-      template_original = ERB.new(File.read(bill_path)).result(binding)
-      @duplicado_original = 'DUPLICADO'
-      template_duplicado = ERB.new(File.read(bill_path)).result(binding)
-      template_original + template_duplicado
+      ERB.new(File.read(bill_path)).result(binding)
     end
   end
 end
