@@ -7,6 +7,7 @@ require 'afip_bill/version'
 module AfipBill
   def self.configuration
     @configuration ||= {
+      header_business_name: nil,
       business_name: nil,
       business_address: nil,
       business_start_date: nil,

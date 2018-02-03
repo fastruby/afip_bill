@@ -15,6 +15,7 @@ gem 'afip_bill'
 In order to have the bills fully complete, you will need to setup some configuration about your business. You can put all of it inside a `config/initializers/afip_bill.rb` if you want:
 
 ```ruby
+AfipBill.configuration[:header_business_name] = "Company Name"
 AfipBill.configuration[:business_name] = "CompanyName SRL"
 AfipBill.configuration[:business_address] = "Address 1234"
 AfipBill.configuration[:business_start_date] = "01/01/2016"
