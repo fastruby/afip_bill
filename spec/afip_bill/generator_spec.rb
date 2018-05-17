@@ -19,6 +19,7 @@ describe AfipBill::Generator do
   let(:pdf_string) { subject.new(bill, user, [item_1, item_2]).generate_pdf_string }
 
   before do
+    AfipBill.configuration[:header_business_name] = "OmbuShop"
     AfipBill.configuration[:business_name] = "OmbuShop SRL"
     AfipBill.configuration[:business_address] = "Av Juan B. Justo 1500"
     AfipBill.configuration[:business_start_date] = "01/01/1900"
