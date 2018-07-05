@@ -1,18 +1,25 @@
 # AfipBill
 
-AfipBill allows you to generate an AFIP bill in PDF format.
+AfipBill allows you to generate an [AFIP](https://www.afip.gob.ar/) bill in PDF format.
+
+The end result will look like this: [bill_sample.pdf](https://github.com/ombulabs/afip_bill/blob/master/bill_sample.pdf)
 
 ## Installation
 
-Include the gem in your Gemfile:
+Include the gem in your Gemfile
 
 ```ruby
 gem 'afip_bill'
 ```
 
+Install it
+```ruby
+$ bundle install
+```
+
 ## Setup
 
-In order to have the bills fully complete, you will need to setup some configuration about your business. You can put all of it inside a `config/initializers/afip_bill.rb` if you want:
+In order to have the bills fully complete, you will need to setup some configuration about your business. If you're in a Rails application you can place that in `config/initializers/afip_bill.rb`
 
 ```ruby
 AfipBill.configuration[:header_business_name] = "Company Name"
@@ -46,16 +53,16 @@ json_bill = {
 ```
 
 In [OmbuShop](https://www.ombushop.com/), we like to automatically generate this
-JSON with [Bravo gem](https://github.com/leanucci/bravo).
+JSON using [Bravo](https://github.com/leanucci/bravo).
 
 ## Usage
 
-There are three important classes that you need to use. Those are: `AfipBill::User`,
+There are three important classes that you need to use: `AfipBill::User`,
 `AfipBill::LineItem` and `AfipBill::Generator`.
 
 ### AfipBill::User
 
-You should create a new instance of this class to provide some information about the bill. It accepts four params: `Company name`, `Owner name`, `Address`, and `Tax category`. So, you should do something like this:
+You should create a new instance of this class to provide some information about the bill. It receives four parameters: `Company name`, `Owner name`, `Address`, and `Tax category`.
 
 ```ruby
 user = AfipBill::User.new("Bill company name",
@@ -66,7 +73,7 @@ user = AfipBill::User.new("Bill company name",
 
 ### AfipBill::LineItem
 
-With this class you can define the line items for your bill. It accepts three params: `Name`, `Quantity`, and `Unit amount`.
+With this class you can define the line items for your bill. It receives three parameters: `Name`, `Quantity`, and `Unit amount`.
 
 ```ruby
 item_1 = AfipBill::LineItem.new("Item 1", 1, 100)
@@ -76,25 +83,24 @@ item_2 = AfipBill::LineItem.new("Item 2", 1, 120)
 
 ### AfipBill::Generator
 
-This is the main class. Here you will generate the PDF bill. It accepts three params: `the json bill`, `the user`, and `the array of line items`
+This class will generate the PDF bill. It receives three parameters: `the json bill`, `the user`, and `the array of line items` (all the parameters were defined above)
 
 ```ruby
 generator = AfipBill::Generator.new(json_bill, user, [item_1, item_2])
 ```
 
-And finally you can render the PDF by using the method `generate_pdf_string`:
+And finally you can render the PDF by using the `generate_pdf_string` method
 
+```ruby
+generator.generate_pdf_string
+```
+
+Or if you're in a Rails app you can render it like this:
 ```ruby
 respond_to do |format|
   format.pdf { render text: generator.generate_pdf_string }
 end
 ```
-
-## Demo
-
-This is a sample of one of the PDFs generated with this gem:
-
-[bill_sample.pdf](https://github.com/ombulabs/afip_bill/blob/master/bill_sample.pdf)
 
 ## Special Thanks
 
