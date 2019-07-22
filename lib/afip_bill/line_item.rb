@@ -15,7 +15,7 @@ module AfipBill
     end
 
     def imp_iva
-      imp_total_unitario * DEFAULT_IVA_PERCENTAGE / 100
+      imp_total_unitario * iva_percentage / 100
     end
 
     def imp_total_unitario_con_iva

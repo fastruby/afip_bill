@@ -5,9 +5,12 @@ describe AfipBill::LineItem do
   subject { described_class }
 
   let(:item) { AfipBill::LineItem.new('Item', 1, 100) }
-  let(:item_custom_iva) { AfipBill::LineItem.new('Item', 1, 100, 5) }
   let(:item_zero_quantity) { AfipBill::LineItem.new('Item', 0, 100) }
   let(:item_multiple_units) { AfipBill::LineItem.new('Item', 10, 100) }
+
+  let(:item_custom_iva) { AfipBill::LineItem.new('Item', 1, 100, 5) }
+  let(:item_custom_iva_zero_quantity) { AfipBill::LineItem.new('Item', 0, 100, 5) }
+  let(:item_custom_iva_multiple_units) { AfipBill::LineItem.new('Item', 10, 100, 5) }
 
   describe '#new' do
     it 'must be created with name, quantity and imp_unitario' do
@@ -75,6 +78,20 @@ describe AfipBill::LineItem do
         expect(item_multiple_units.imp_iva).to eq 210
       end
     end
+
+    describe 'custom IVA' do
+      it 'should calculate imp_iva for quantity zero' do
+        expect(item_custom_iva_zero_quantity.imp_iva).to be_zero
+      end
+
+      it 'should calculate imp_iva for quantity one' do
+        expect(item_custom_iva.imp_iva).to eq 5
+      end
+
+      it 'should calculate imp_iva for quantity greater than one' do
+        expect(item_custom_iva_multiple_units.imp_iva).to eq 50
+      end
+    end
   end
 
   describe '#imp_total_unitario_con_iva' do
@@ -89,6 +106,20 @@ describe AfipBill::LineItem do
 
       it 'should calculate imp_total_unitario_con_iva for quantity greater than one' do
         expect(item_multiple_units.imp_total_unitario_con_iva).to eq 1210
+      end
+    end
+
+    describe 'custom IVA' do
+      it 'should calculate imp_total_unitario_con_iva for quantity zero' do
+        expect(item_custom_iva_zero_quantity.imp_total_unitario_con_iva).to be_zero
+      end
+
+      it 'should calculate imp_total_unitario_con_iva for quantity one' do
+        expect(item_custom_iva.imp_total_unitario_con_iva).to eq 105
+      end
+
+      it 'should calculate imp_total_unitario_con_iva for quantity greater than one' do
+        expect(item_custom_iva_multiple_units.imp_total_unitario_con_iva).to eq 1050
       end
     end
   end
