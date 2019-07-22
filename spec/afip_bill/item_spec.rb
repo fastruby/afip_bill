@@ -59,4 +59,20 @@ describe AfipBill::LineItem do
       end
     end
   end
+
+  describe '#imp_total_unitario_con_iva' do
+    describe 'default IVA (21%)' do
+      it 'should calculate imp_total_unitario_con_iva for quantity zero' do
+        expect(item_zero_quantity.imp_total_unitario_con_iva).to be_zero
+      end
+
+      it 'should calculate imp_total_unitario_con_iva for quantity one' do
+        expect(item.imp_total_unitario_con_iva).to eq 121
+      end
+
+      it 'should calculate imp_total_unitario_con_iva for quantity greater than one' do
+        expect(item_multiple_units.imp_total_unitario_con_iva).to eq 1210
+      end
+    end
+  end
 end
