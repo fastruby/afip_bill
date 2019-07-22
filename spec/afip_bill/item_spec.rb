@@ -5,6 +5,8 @@ describe AfipBill::LineItem do
   subject { described_class }
 
   let(:item) { AfipBill::LineItem.new('Item', 1, 100) }
+  let(:item_zero_quantity) { AfipBill::LineItem.new('Item', 0, 100) }
+  let(:item_multiple_units) { AfipBill::LineItem.new('Item', 10, 100) }
 
   describe '#new' do
     it 'must be created with name, quantity and imp_unitario' do
@@ -25,6 +27,20 @@ describe AfipBill::LineItem do
 
     it 'has imp_unitario' do
       expect(item.imp_unitario).to eq 100
+    end
+  end
+
+  describe '#imp_total_unitario' do
+    it 'should calculate imp_total_unitario for quantity zero' do
+      expect(item_zero_quantity.imp_total_unitario).to be_zero
+    end
+
+    it 'should calculate imp_total_unitario for quantity one' do
+      expect(item.imp_total_unitario).to eq 100
+    end
+
+    it 'should calculate imp_total_unitario for quantity greater than one' do
+      expect(item_multiple_units.imp_total_unitario).to eq 1000
     end
   end
 end
