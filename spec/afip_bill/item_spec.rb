@@ -14,6 +14,12 @@ describe AfipBill::LineItem do
 
       expect(item).to be_an_instance_of AfipBill::LineItem
     end
+
+    it 'can be created with name, quantity, imp_unitario, iva_percentage' do
+      item = AfipBill::LineItem.new('Item', 1, 100, 5)
+
+      expect(item).to be_an_instance_of AfipBill::LineItem
+    end
   end
 
   describe 'attributes' do
