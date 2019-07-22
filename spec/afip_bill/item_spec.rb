@@ -45,8 +45,18 @@ describe AfipBill::LineItem do
   end
 
   describe '#imp_iva' do
-    it 'should calculate imp_iva for default IVA (21%)' do
-      expect(item.imp_iva).to eq 21
+    describe 'default IVA (21%)' do
+      it 'should calculate imp_iva for quantity zero' do
+        expect(item_zero_quantity.imp_iva).to be_zero
+      end
+
+      it 'should calculate imp_iva for quantity one' do
+        expect(item.imp_iva).to eq 21
+      end
+
+      it 'should calculate imp_iva for quantity greater than one' do
+        expect(item_multiple_units.imp_iva).to eq 210
+      end
     end
   end
 end
