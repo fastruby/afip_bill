@@ -5,6 +5,7 @@ describe AfipBill::LineItem do
   subject { described_class }
 
   let(:item) { AfipBill::LineItem.new('Item', 1, 100) }
+  let(:item_custom_iva) { AfipBill::LineItem.new('Item', 1, 100, 5) }
   let(:item_zero_quantity) { AfipBill::LineItem.new('Item', 0, 100) }
   let(:item_multiple_units) { AfipBill::LineItem.new('Item', 10, 100) }
 
@@ -33,6 +34,16 @@ describe AfipBill::LineItem do
 
     it 'has imp_unitario' do
       expect(item.imp_unitario).to eq 100
+    end
+
+    describe 'iva_percentage' do
+      it 'has iva_percentage' do
+        expect(item_custom_iva.iva_percentage).to eq 5
+      end
+
+      it 'defaults to 21' do
+        expect(item.iva_percentage).to eq 21
+      end
     end
   end
 

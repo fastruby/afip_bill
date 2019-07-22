@@ -1,6 +1,6 @@
 module AfipBill
   class LineItem
-    attr_reader :name, :quantity, :imp_unitario
+    attr_reader :name, :quantity, :imp_unitario, :iva_percentage
     DEFAULT_IVA_PERCENTAGE = 21.freeze
 
     def initialize(name, quantity, imp_unitario, iva_percentage = DEFAULT_IVA_PERCENTAGE)
