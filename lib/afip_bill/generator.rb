@@ -44,6 +44,8 @@ module AfipBill
 
     def alicuotas
       result = {}
+      return result unless type_a_or_b_bill == 'a'
+
       line_items.each { |i| result[i.iva_percentage] = result[i.iva_percentage].to_f + i.imp_iva }
       result
     end

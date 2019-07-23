@@ -34,14 +34,24 @@ describe AfipBill::Generator do
   end
 
   describe '#alicuotas' do
-    let(:type) { 'type_a' }
+    context 'Bill type A' do
+      let(:type) { 'type_a' }
 
-    it 'should calculate alicuotas for default IVA (21%)' do
-      expect(alicuotas_default).to eq ({ 21 => 42 })
+      it 'should calculate alicuotas for default IVA (21%)' do
+        expect(alicuotas_default).to eq ({ 21 => 42 })
+      end
+
+      it 'should calculate alicoutas for mixed IVAs' do
+        expect(alicuotas_mixed).to eq ({ 21 => 42, 10.5 => 10.5 })
+      end
     end
 
-    it 'should calculate alicoutas for mixed IVAs' do
-      expect(alicuotas_mixed).to eq ({ 21 => 42, 10.5 => 10.5 })
+    context 'Bill type B' do
+      let(:type) { 'type_b' }
+
+      it 'should return an empty hash' do
+        expect(alicuotas_default).to be_empty
+      end
     end
   end
 
