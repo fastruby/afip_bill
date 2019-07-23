@@ -76,5 +76,9 @@ module AfipBill
     def template
       ERB.new(File.read(bill_path)).result(binding)
     end
+
+    def format_amount(amount)
+      ('%.2f' % amount.round(2).to_s).tr('.', ',')
+    end
   end
 end
