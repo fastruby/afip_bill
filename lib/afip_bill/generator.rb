@@ -42,6 +42,12 @@ module AfipBill
       PDFKit.new(template).to_pdf
     end
 
+    def alicuotas
+      result = {}
+      line_items.each { |i| result[i.iva_percentage] = result[i.iva_percentage].to_f + i.imp_iva }
+      result
+    end
+
     private
 
     def bill_path
