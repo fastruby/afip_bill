@@ -20,7 +20,7 @@
   <div style="left:360.54px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= line_item.imp_unitario.to_s.tr(".", ",") %></span></div>
   <div style="left:398.43px;top:<%= top %>px" class="cls_008"><span class="cls_008">0,00</span></div>
   <div style="width:60px;left:70.4%;top:<%= top %>px" class="cls_008"><span style="position:absolute;right:0" class="cls_008"><%= line_item.imp_total_unitario.round(2).to_s.tr(".", ",") %></span></div>
-  <div style="left:490.00px;top:<%= top %>px" class="cls_008"><span class="cls_008">21%</span></div>
+  <div style="left:490.00px;top:<%= top %>px" class="cls_008"><span class="cls_008"><%= "#{line_item.iva_percentage.to_s.tr('.', ',')}%" %></span></div>
   <div style="width:60px;left:87%;top:<%= top %>px" class="cls_008"><span style="position:absolute;right:0" class="cls_008"><%= line_item.imp_total_unitario_con_iva.round(2).to_s.tr(".", ",") %></span></div>
   <% top += 25 %>
 <% end %>
