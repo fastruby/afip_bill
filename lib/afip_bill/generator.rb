@@ -7,7 +7,7 @@ require "pdfkit"
 
 module AfipBill
   class Generator
-    attr_reader :afip_bill, :bill_type, :user, :line_items, :header_text
+    attr_reader :afip_bill, :bill_type, :user, :line_items, :header_text, :alicuotas
 
     HEADER_PATH = File.dirname(__FILE__) + '/views/shared/_factura_header.html.erb'.freeze
     FOOTER_PATH = File.dirname(__FILE__) + '/views/shared/_factura_footer.html.erb'.freeze
@@ -22,6 +22,7 @@ module AfipBill
       @template_header = ERB.new(File.read(HEADER_PATH)).result(binding)
       @template_footer = ERB.new(File.read(FOOTER_PATH)).result(binding)
       @header_text = header_text
+      @alicuotas = calculate_alicuotas
     end
 
     def type_a_or_b_bill
@@ -40,14 +41,6 @@ module AfipBill
 
     def generate_pdf_string
       PDFKit.new(template).to_pdf
-    end
-
-    def alicuotas
-      result = {}
-      return result unless type_a_or_b_bill == 'a'
-
-      line_items.each { |i| result[i.iva_percentage] = result[i.iva_percentage].to_f + i.imp_iva }
-      result
     end
 
     private
@@ -79,6 +72,14 @@ module AfipBill
 
     def format_amount(amount)
       ('%.2f' % amount.round(2).to_s).tr('.', ',')
+    end
+
+    def calculate_alicuotas
+      result = {}
+      return result unless type_a_or_b_bill == 'a'
+
+      line_items.each { |i| result[i.iva_percentage] = result[i.iva_percentage].to_f + i.imp_iva }
+      result
     end
   end
 end
