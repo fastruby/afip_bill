@@ -11,7 +11,7 @@ module AfipBill
 
     HEADER_PATH = File.dirname(__FILE__) + '/views/shared/_factura_header.html.erb'.freeze
     FOOTER_PATH = File.dirname(__FILE__) + '/views/shared/_factura_footer.html.erb'.freeze
-    CBTE_TIPO = { "01" => "Factura A", "06" => "Factura B" }.freeze
+    CBTE_TIPO = { "01" => "Factura A", "06" => "Factura B", "11" => "Factura C" }.freeze
     IVA = 21.freeze
 
 
