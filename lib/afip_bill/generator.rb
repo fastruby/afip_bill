@@ -25,7 +25,7 @@ module AfipBill
     end
 
     def type_a_or_b_bill
-      BRAVO_CBTE_TIPO[afip_bill["cbte_tipo"]][-1].downcase
+      CBTE_TIPO[afip_bill["cbte_tipo"]][-1].downcase
     end
 
     def barcode
