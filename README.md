@@ -40,7 +40,7 @@ It must contain at least these attributes:
 json_bill = {
   cae: "1234567890123",       # CAE number
   doc_num: "12345678901",     # CUIT number
-  cbte_tipo: "01",            # Bill type (01 = A, 06 = B)
+  cbte_tipo: "01",            # Bill type (01 = A, 06 = B, 11 = C)
   cbte_fch: "20170125",       # Bill date
   imp_neto: 220.0,            # Net amount
   imp_iva: 46.2,              # IVA amount
