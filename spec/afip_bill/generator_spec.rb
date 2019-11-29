@@ -14,7 +14,10 @@ describe AfipBill::Generator do
   let(:bill) { File.read(bill_path) }
   let(:item_1) { AfipBill::LineItem.new("Item 1", 1, 100) }
   let(:item_2) { AfipBill::LineItem.new("Item 2", 1, 100) }
+  let(:item_3) { AfipBill::LineItem.new('Item 3', 1, 100, 10.5) }
 
+  let(:alicuotas_default) { subject.new(bill, user, [item_1, item_2]).alicuotas }
+  let(:alicuotas_mixed) { subject.new(bill, user, [item_1, item_2, item_3]).alicuotas }
   let(:pdf_file) { subject.new(bill, user, [item_1, item_2]).generate_pdf_file }
   let(:pdf_string) { subject.new(bill, user, [item_1, item_2]).generate_pdf_string }
 
@@ -28,6 +31,28 @@ describe AfipBill::Generator do
     AfipBill.configuration[:ingresos_brutos] = "901-111111-4"
     AfipBill.configuration[:iva] = "IVA Responsable Inscripto"
     AfipBill.configuration[:sale_point] = "005"
+  end
+
+  describe '#alicuotas' do
+    context 'Bill type A' do
+      let(:type) { 'type_a' }
+
+      it 'should calculate alicuotas for default IVA (21%)' do
+        expect(alicuotas_default).to eq ({ 21 => 42 })
+      end
+
+      it 'should calculate alicoutas for mixed IVAs' do
+        expect(alicuotas_mixed).to eq ({ 21 => 42, 10.5 => 10.5 })
+      end
+    end
+
+    context 'Bill type B' do
+      let(:type) { 'type_b' }
+
+      it 'should return an empty hash' do
+        expect(alicuotas_default).to be_empty
+      end
+    end
   end
 
   describe "generate_pdf" do
