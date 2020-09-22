@@ -154,7 +154,7 @@
 
 <div class="main">
   <div style="left:0px;top:0px">
-    <img src='file://<%= Gem.loaded_specs['afip_bill'].full_gem_path + "/lib/afip_bill/assets/images/factura_#{bill_type}.jpg" %>' width="595px" height="842px">
+    <img src='file://<%= Gem.loaded_specs['afip_bill'].full_gem_path + "/lib/afip_bill/assets/images/factura_#{bill_type == 'c' ? 'b' : bill_type}.jpg" %>' width="595px" height="842px">
 
   </div>
 
