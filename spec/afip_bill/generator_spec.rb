@@ -73,5 +73,14 @@ describe AfipBill::Generator do
         expect(pdf_string[0..3]).to eq "%PDF"
       end
     end
+
+    context 'Bill with product concept and no service dates' do
+      let(:type) { 'type_a_product' }
+
+      it "has the 'magic number' that identify a PDF file" do
+        expect(pdf_file.readpartial(4)).to eq "%PDF"
+        expect(pdf_string[0..3]).to eq "%PDF"
+      end
+    end
   end
 end

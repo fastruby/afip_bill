@@ -13,6 +13,7 @@ module AfipBill
     FOOTER_PATH = File.dirname(__FILE__) + '/views/shared/_factura_footer.html.erb'.freeze
     CBTE_TIPO = { "01" => "Factura A", "06" => "Factura B", "11" => "Factura C" }.freeze
     IVA = 21.freeze
+    PRODUCT_CONCEPT_CODE = '01'.freeze
 
 
     def initialize(bill, user, line_items = [], header_text = 'ORIGINAL')
@@ -75,6 +76,10 @@ module AfipBill
       ERB.new(File.read(bill_path)).result(binding)
     end
 
+    def hide_service_dates?
+      @afip_bill['concepto'] == PRODUCT_CONCEPT_CODE
+    end
+    
     def format_amount(amount)
       ('%.2f' % amount.round(2).to_s).tr('.', ',')
     end

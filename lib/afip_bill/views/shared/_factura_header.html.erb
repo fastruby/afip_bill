@@ -179,11 +179,15 @@
   <div style="left:341.00px;top:147.41px" class="cls_002"><span class="cls_002">Fecha de Inicio de Actividades:</span></div>
   <div style="left:482.00px;top:147.41px" class="cls_006"><span class="cls_006"><%= AfipBill.configuration[:business_start_date] %></span></div>
   <div style="left:21.00px;top:150.41px" class="cls_002"><span class="cls_002">Condición frente al IVA: <%= AfipBill.configuration[:iva] %></span></div>
-  <div style="left:21.00px;top:169.29px" class="cls_005"><span class="cls_005">Período Facturado Desde:</span></div>
-  <div style="left:159.00px;top:169.29px" class="cls_007"><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_desde"]).strftime("%d/%m/%Y") %></span></div>
-  <div style="left:232.44px;top:169.29px" class="cls_005"><span class="cls_005">Hasta:</span><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_hasta"]).strftime("%d/%m/%Y") %></span></div>
-  <div style="left:362.96px;top:169.29px" class="cls_005"><span class="cls_005">Fecha de Vto. para el pago:</span></div>
-  <div style="left:495.00px;top:169.29px" class="cls_007"><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_hasta"]).strftime("%d/%m/%Y") %></span></div>
+
+  <% unless hide_service_dates? %>
+    <div style="left:21.00px;top:169.29px" class="cls_005"><span class="cls_005">Período Facturado Desde:</span></div>
+    <div style="left:159.00px;top:169.29px" class="cls_007"><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_desde"]).strftime("%d/%m/%Y") %></span></div>
+    <div style="left:232.44px;top:169.29px" class="cls_005"><span class="cls_005">Hasta:</span><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_hasta"]).strftime("%d/%m/%Y") %></span></div>
+    <div style="left:362.96px;top:169.29px" class="cls_005"><span class="cls_005">Fecha de Vto. para el pago:</span></div>
+    <div style="left:495.00px;top:169.29px" class="cls_007"><span class="cls_007"><%= Date.parse(afip_bill["fch_serv_hasta"]).strftime("%d/%m/%Y") %></span></div>
+  <% end %>
+
   <div style="left:21.00px;top:189.59px" class="cls_002"><span class="cls_002">CUIT:</span></div>
   <div style="left:52.00px;top:189.59px" class="cls_006"><span class="cls_006"><%= afip_bill["doc_num"] %></span></div>
   <div style="left:205.97px;top:189.59px" class="cls_002"><span class="cls_002">Apellido y Nombre / Razón Social:</span></div>
