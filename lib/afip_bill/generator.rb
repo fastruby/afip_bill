@@ -76,7 +76,7 @@ module AfipBill
       ERB.new(File.read(bill_path)).result(binding)
     end
 
-    def should_hide_service_dates
+    def hide_service_dates?
       @afip_bill['concepto'] == PRODUCT_CONCEPT_CODE
     end
     
